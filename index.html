@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Env Transformer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        textarea, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            white-space: pre-wrap; /* Preserve whitespace formatting */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Env Transformer</h1>
+    <textarea id="inputString" rows="10" placeholder="Enter strings separated by commas, one per line"></textarea>
+    <button onclick="transformStrings()">Transform</button>
+    <div id="result"></div>
+    <h2>Instructions</h2>
+    <p>Enter key-value pairs separated by commas in the textarea above. The keys and values will be transformed to uppercase and joined with double underscores (__).</p>
+    <h2>Use Cases</h2>
+    <p>Example input:</p>
+    <pre>key1=value1, key2=value2</pre>
+    <p>Example output:</p>
+    <pre>KEY1=VALUE1__KEY2=VALUE2</pre>
+    <pre>
+env:
+  - name: KEY1
+    value: VALUE1
+  - name: KEY2
+    value: VALUE2
+    </pre>
+</div>
+
+<script>
+    function transformStrings() {
+        const input = document.getElementById('inputString').value;
+        if (!input) {
+            document.getElementById('result').textContent = 'Please enter some strings.';
+            return;
+        }
+        const strings = input.split(',').map(s => s.trim());
+        const transformed = strings.map(s => s.toUpperCase()).join('__');
+        document.getElementById('result').textContent = transformed;
+    }
+</script>
+
+</body>
+</html>
